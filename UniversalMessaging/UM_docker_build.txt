@@ -1,3 +1,5 @@
+# http://techcommunity.softwareag.com/ecosystem/communities/public/apama/products/universal-messaging/downloads/
+
 cd /opt/softwareag/
 
 
