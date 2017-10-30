@@ -1,0 +1,49 @@
+# Copyright (c) 2015 Software AG, Darmstadt, Germany and/or Software AG USA Inc., Reston, VA, USA, and/or its subsidiaries and/or its affiliates and/or their licensors.
+# Use, reproduction, transfer, publication or disclosure is prohibited except as specifically provided for in your License Agreement with Software AG
+#
+# $Date: 2015-07-20 18:16:17 +0100 (Mon, 20 Jul 2015) $
+# $Revision: 259887 $
+#
+# This Dockerfile is a minor derivative of the main Dockerfile, and is a variant
+# that should function from inside a native installation (so long as it includes
+# a JVM), as opposed to the SAG installer. It is nearly identical, except for
+# paths.
+
+FROM centos:7
+
+MAINTAINER SoftwareAG
+
+RUN yum install -y compat-libstdc++-33.i686
+
+COPY ./UniversalMessaging/server/umserver/ /um_home/server/umserver/
+COPY ./UniversalMessaging/lib/ /um_home/lib/
+COPY ./UniversalMessaging/classes/ /um_home/classes/
+COPY ./UniversalMessaging/java/umserver/ /um_home/java/umserver/
+COPY ./UniversalMessaging/javascript/lib/ /um_home/javascript/lib/
+#COPY ./jre/ /java_home/
+#edited for UM 10.
+COPY ./jvm/jvm/jre/ /java_home/
+COPY ./umctx /um_home/umctx/umctx
+ENV PATH=/bin:/usr/bin:/um_home/umctx/:/java_home/bin/\
+    CLASSPATH=lib/*:classes/
+
+RUN cd /um_home/server/umserver/; mkdir -p plugins/log/; cd plugins/log/; rm -f *; ln -s /dev/stdout error.log; ln -s /dev/stdout plugin.log; ln -s /dev/stdout access.log
+
+#RUN rm -f `find /um_home/ -name *.jks`; rm -rf /um_home/server/license/; rm -rf /um_home/server/umserver/data/
+#leaving license in
+RUN rm -f `find /um_home/ -name *.jks`; rm -rf /um_home/server/umserver/data/
+
+ENV REALM umserver
+
+ENV SERVER_OPTS_EXTRA -DCORE_SPIN=false
+
+EXPOSE 9000
+
+WORKDIR /um_home/
+
+RUN chgrp -R 0 /um_home && chmod -R g=u /um_home
+
+CMD ["umctx", "nserver"]
+#edit due to path error
+#CMD ["/um_home/umctx/umctx", "nserver"]
+

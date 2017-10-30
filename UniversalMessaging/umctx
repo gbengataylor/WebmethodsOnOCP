@@ -1,0 +1,141 @@
+#!/bin/bash
+
+# Copyright (c) 2015 Software AG, Darmstadt, Germany and/or Software AG USA Inc., Reston, VA, USA, and/or its subsidiaries and/or its affiliates and/or their licensors.
+# Use, reproduction, transfer, publication or disclosure is prohibited except as specifically provided for in your License Agreement with Software AG
+#
+# $Date: 2015-07-21 16:45:20 +0100 (Tue, 21 Jul 2015) $
+# $Revision: 259965 $
+#
+# This script is a wrapper around Universal Messaging executables, to enable them to be launched with the correct environment when this script
+# is run inside a Docker container.
+#
+# For the realm server this is straightforward, just launching nserver with the correct settings, and ensuring that it gets shut down cleanly
+# on receipt of a SIGTERM from 'docker stop'.
+#
+# Example:
+#    umctx nserver
+#
+# Client tools for configuring the realm server are different; as they will be run as a single command inside a new container, or as a RUN
+# command in a Dockerfile, they will need a realm server to configure. This script manages the startup of a realm server, executes the
+# client tool against it, and then arranges orderly shutdown of the server so that state is then committed to the filesystem and can be
+# safely 'baked' into a new pre-configured Docker image.
+#
+# Example:
+#    umctx naddrealmacl stevedore * full
+
+BIN_NAME=$1
+shift
+
+# Define all of the usual realm server options, except:
+#     The realm name which is parameterised from the environment
+#     Logging which goes to stdout in order to be captured by Docker's logging system
+#     SERVER_OPTS_EXTRA from the environment
+SERVER_OPTS="-DDATADIR=server/umserver
+             -DREALM=$REALM
+             -DSERVERDIR=server/umserver
+             -DADAPTER_0=nhp://0.0.0.0:9000
+             -DLICENCE_DIR=server/license/
+             -DLICENCE_FILE=licence.xml
+             -DLOGFILE=/dev/stdout
+             -Djavax.net.ssl.trustStore=server/umserver/bin/nirvanacacerts.jks
+             -Djavax.net.ssl.trustStorePassword=nirvana
+             -Djavax.net.ssl.keyStore=server/umserver/bin/server.jks
+             -Djavax.net.ssl.keyStorePassword=nirvana
+             -Djava.protocol.handler.pkgs=com.sun.net.ssl.internal.www.protocol
+             -Dcom.sun.management.jmxremote
+             -Djava.library.path=lib/
+             -DLOGLEVEL=4
+             -XX:MaxDirectMemorySize=1G
+             $SERVER_OPTS_EXTRA"
+
+# Some of our arguments get passed through to java. Sometimes they contain '*', and we would like it if they didn't get expanded.
+set -o noglob
+
+# The first time the server is run, the data will be a total blank slate. We can live with that, except we want to restore the default *@*
+# full ACL.
+if [[ ! -e server/umserver/data ]]
+then
+	echo '*@*' > server/umserver/bin/secfile.conf
+	SERVER_OPTS="$SERVER_OPTS -DSECURITYFILE=server/umserver/bin/secfile.conf"
+fi
+
+if [[ $BIN_NAME == "nserver" ]]
+then
+	####
+	# Starting the realm server in the container
+	####
+
+	java $SERVER_OPTS com.pcbsys.nirvana.server.Server $@ &
+
+	# Ensure that 'docker stop' performs a clean server shutdown
+	export SERVER_PID=$!
+	trap "rm server/umserver/data/RealmServer.lck; wait $SERVER_PID" SIGTERM
+	wait $SERVER_PID
+else
+	####
+	# Starting a client tool in the container - for it to have any meaning, there must be a realm server to configure/query.
+	# 1. Bring up the realm server
+	# 2. Run the client tool against it
+	# 3. Shut it down gracefully, committing the configuration/state changes made by the tool
+	####
+
+	# In case our client command (or the server it depends on) fails
+	fail() {
+		echo "Dumping realm server logs:"
+		cat umctx/nserver.out
+		echo
+		echo "Dumping realm server stderr:"
+		cat umctx/nserver.err
+		exit 1
+	}
+
+	CLIENT_OPTS="-DRNAME=nsp://localhost:9000 -Djava.library.path=lib/"
+
+	# Mock up a sensible error message if the client tool doesn't actually exist, as we're running it via java invocation, not directly
+	if [[ ! -e java/umserver/bin/$BIN_NAME ]]
+	then
+		echo $BIN_NAME: command not found 1>&2
+		exit 1
+	fi
+
+	# Start the realm server
+	java $SERVER_OPTS -cp $CLASSPATH com.pcbsys.nirvana.server.Server >umctx/nserver.out 2>umctx/nserver.err &
+	export SERVER_PID=$!
+
+	# Wait for the realm server to be up so we don't upset the clients
+	for i in `seq 60`
+	do
+		bash -c "echo >/dev/tcp/localhost/9000" 2>/dev/null
+		waitforup_ret="$?"
+		if [ $waitforup_ret -eq 0 ]
+		then
+			break
+		fi
+		sleep 1
+	done
+	
+	# If the realm server started correctly then run the client, else exit
+	if [ $waitforup_ret -eq 0 ]
+	then
+		CLASS=`cat java/umserver/bin/$BIN_NAME.{lax,conf} 2>/dev/null |
+		       grep -e 'lax.main.class' -e 'app.parameter.1' -e 'wrapper.java.mainclass' |
+		       sed s/.*=//`
+		java $CLIENT_OPTS -cp $CLASSPATH $CLASS $@
+		client_ret="$?"
+		if [[ ! $client_ret -eq 0 ]]
+		then
+			fail
+		fi
+	else
+		echo "ERROR: UM Server failed to start"
+		fail
+	fi
+
+	# Shutdown the realm server
+	rm -f server/umserver/data/RealmServer.lck
+	wait $SERVER_PID
+	if [[ ! $? -eq 0 ]]
+	then
+		fail
+	fi
+fi

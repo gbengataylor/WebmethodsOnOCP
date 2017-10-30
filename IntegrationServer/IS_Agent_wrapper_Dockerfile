@@ -1,0 +1,7 @@
+FROM is_agent:100
+
+MAINTAINER Software AG
+
+ENV APP_ROOT=/sag
+RUN chgrp -R 0 ${APP_ROOT} && chmod -R g=u ${APP_ROOT}
+
