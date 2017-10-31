@@ -7,7 +7,7 @@ docker build --tag um_configured:100 .
 
 Test the image
 
-docker run -d -p 9000:9000 --name um_configured_container um:100
+docker run -d -p 9000:9000 --name um_configured_container um_configured:100
 
 
 # Test the Universal Manager with the webmethods Integration Server
@@ -36,7 +36,7 @@ oc new-app  um_configured.yml --param IMAGE_TAG=100
 
 oc new-app --docker-image=um_configured:100
 
-oc patch svc/um_configured --patch '{"spec":{"type":"NodePort"}}'
+oc patch svc/um-configured --patch '{"spec":{"type":"NodePort"}}'
 
 # Deploy in openshift and use port forwarding
 
@@ -46,10 +46,10 @@ TODO..
 
 find the node port
 
- oc get svc um_configured -o yaml | grep nodePort
+ oc get svc um-configured -o yaml | grep nodePort
 or 
 
-Check the Service->um_configured in the web console for the node port
+Check the Service->um-configured in the web console for the node port
 
 login into Integration Server Admin console
 
@@ -59,4 +59,4 @@ Add a new UM_Connection and set the realm to
 nsp://hostname:nodePort output
 
 
-
+TODO: Show the JMS queue and channel
