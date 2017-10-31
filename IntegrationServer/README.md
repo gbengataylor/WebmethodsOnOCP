@@ -39,4 +39,10 @@ oc expose service is-agent --name=5555 --port=5555
 
 oc expose service is-agent --name=9999 --port=9999
 
+# Test the admin consoles
 
+Using the routes exposed 
+
+oc get routes 
+
+Log into the admin consoles using Administrator/manage
