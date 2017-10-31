@@ -9,6 +9,8 @@ Edit the um/image/Dockerfile to change the group and permissions before the CMD 
 
     +++ #edit, change group and permissions
     +++ RUN chgrp -R 0 /um_home && chmod -R g=u /um_home
+    +++# Copy the license into the location that the UM realm server expects
+    +++COPY ./UniversalMessaging/server/umserver/licence.xml /um_home/server/license/licence.xml
     
 or just use the Dockerfile in this directory
 

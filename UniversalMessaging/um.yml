@@ -62,7 +62,7 @@ objects:
 
 parameters:
 - name: SERVICE_ACCOUNT
- description: "Service Account for higher privileges"
+  description: "Service Account for higher privileges"
 
 - name: ROUTE_NAME
   description: "Name of route for port 9000"
@@ -80,4 +80,3 @@ parameters:
   description: "Tag of the container image"
   value: latest
   required: true
-

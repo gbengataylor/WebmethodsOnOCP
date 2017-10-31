@@ -58,6 +58,9 @@ WORKDIR /um_home/
 #edit, change group and permissions
 RUN chgrp -R 0 /um_home && chmod -R g=u /um_home
 
+# Copy the license into the location that the UM realm server expects
+COPY ./UniversalMessaging/server/umserver/licence.xml /um_home/server/license/licence.xml
+
 # The default operation for the image is to start a realm server
 # You probably have no need to override this
 CMD ["umctx", "nserver"]
