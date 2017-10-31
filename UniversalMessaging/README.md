@@ -14,6 +14,21 @@ in the softwareag directory, build the docker file
 
 docker build --tag um:100 .
 
-To 
+Test the image
+
+docker run -d -p 9000:9000 --name um_container um:100
+
+Stoop and delete the container
+
+docker stop um_container && docker rm um_container
+
+# Deploy in Openshift using the um.yml template
+oc new-app  um.yml --param IMAGE_TAG=100
+
+#Deploy in openshift without the template 
+oc new-app --docker-image=um:100
+oc expose service um
+
+
 
 
