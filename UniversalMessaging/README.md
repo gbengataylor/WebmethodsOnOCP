@@ -52,15 +52,23 @@ oc new-app  um.yml --param IMAGE_TAG=100
 
 oc new-app --docker-image=um:100
 
-#oc expose service um
+oc patch svc/um --patch '{"spec":{"type":"NodePort"}}'
+
+# Deploy in openshift and use port forwarding
+
+TODO..
 
 # Test
+
+find the port
+
+ oc get svc yn -o yaml | grep nodePort
 
 login into Integration Server Admin console
 
 Settings > Messaging > webMethods Messaging Settings > Universal Messaging Connection Alias
 
-TODO: how to expose port with nsp
+change the UM_Connection to nsp://<hostname>:<nodePort output>
 
 
 
