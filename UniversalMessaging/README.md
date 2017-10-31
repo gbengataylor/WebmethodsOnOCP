@@ -30,9 +30,11 @@ Stop and delete the running container
 
 docker stop um_container && docker rm um_container
 
-# test
+# Test the Universal Manager with the webmethods Integration Server
 
-login into Integration Server Admin console
+Assumes the IS agent is running
+
+login into Integration Server Admin console at the 555 port
 
 Settings > Messaging > webMethods Messaging Settings > Universal Messaging Connection Alias
 
@@ -43,6 +45,7 @@ Go to Settings > Messaging > webMethods Messaging Settings
 If successful, Universal Messaging should now be Enabled
 
 # Deploy in Openshift using the um.yml template
+
 oc new-app  um.yml --param IMAGE_TAG=100
 
 # Deploy in openshift without the template 
