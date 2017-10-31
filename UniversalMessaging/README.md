@@ -2,6 +2,7 @@
 
 http://techcommunity.softwareag.com/ecosystem/communities/public/apama/products/universal-messaging/downloads/
 
+# Build the docker image
 Download the Universal Messaging Packaging Kit for Docker - http://techcommunity.softwareag.com/ecosystem/communities/public/apama/products/apama/.links/universal-messaging-docker
 
 Edit the file to change the group and permissions or just use the Dockerfile in this directory
@@ -25,7 +26,7 @@ docker stop um_container && docker rm um_container
 # Deploy in Openshift using the um.yml template
 oc new-app  um.yml --param IMAGE_TAG=100
 
-#Deploy in openshift without the template 
+# Deploy in openshift without the template 
 oc new-app --docker-image=um:100
 oc expose service um
 
