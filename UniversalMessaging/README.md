@@ -30,6 +30,18 @@ Stop and delete the running container
 
 docker stop um_container && docker rm um_container
 
+# test
+
+login into Integration Server Admin console
+
+Settings > Messaging > webMethods Messaging Settings > Universal Messaging Connection Alias
+
+change the UM_Connection to nsp://<hostname>:9000
+
+Go to Settings > Messaging > webMethods Messaging Settings
+
+If successful, Universal Messaging should now be Enabled
+
 # Deploy in Openshift using the um.yml template
 oc new-app  um.yml --param IMAGE_TAG=100
 
@@ -37,8 +49,15 @@ oc new-app  um.yml --param IMAGE_TAG=100
 
 oc new-app --docker-image=um:100
 
-oc expose service um
+#oc expose service um
 
+# Test
+
+login into Integration Server Admin console
+
+Settings > Messaging > webMethods Messaging Settings > Universal Messaging Connection Alias
+
+TODO: how to expose port with nsp
 
 
 
