@@ -5,14 +5,14 @@ http://techcommunity.softwareag.com/ecosystem/communities/public/apama/products/
 # Build the docker image
 Download the Universal Messaging Packaging Kit for Docker - http://techcommunity.softwareag.com/ecosystem/communities/public/apama/products/apama/.links/universal-messaging-docker
 
-Edit the file to change the group and permissions before the CMD command:
+Edit the um/image/Dockerfile to change the group and permissions before the CMD command:
 
     +++ #edit, change group and permissions
     +++ RUN chgrp -R 0 /um_home && chmod -R g=u /um_home
     
 or just use the Dockerfile in this directory
 
-copy the Dockerfile to where softwareag webmethods is installed. Assume it is installed in /opt/softwareag/
+copy the Dockerfile to where softwareag webmethods is installed.
 
 copy the umtcx file to the softwareag directory
 
