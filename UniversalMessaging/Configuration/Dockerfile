@@ -17,5 +17,5 @@ RUN umctx jmsadmin bind queue testqueue
 # Create a channel called TestChannel 
 RUN umctx nmakechan TestChannel
 
-# create data dir that was deleted and update permissions
+# update permissions
 RUN chgrp -R 0 /um_home && chmod -R g=u /um_home
