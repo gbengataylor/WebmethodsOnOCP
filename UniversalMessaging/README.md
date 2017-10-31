@@ -38,7 +38,7 @@ login into Integration Server Admin console at the 555 port
 
 Settings > Messaging > webMethods Messaging Settings > Universal Messaging Connection Alias
 
-change the UM_Connection to nsp://<hostname>:9000
+change the UM_Connection to nsp://hostname:9000
 
 Go to Settings > Messaging > webMethods Messaging Settings
 
@@ -69,7 +69,7 @@ login into Integration Server Admin console
 Settings > Messaging > webMethods Messaging Settings > Universal Messaging Connection Alias
 
 change the UM_Connection to 
-nsp:// <hostname> : <nodePort output>
+nsp://hostname:nodePort output
 
 
 
