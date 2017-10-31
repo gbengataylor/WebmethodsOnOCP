@@ -68,7 +68,8 @@ login into Integration Server Admin console
 
 Settings > Messaging > webMethods Messaging Settings > Universal Messaging Connection Alias
 
-change the UM_Connection to nsp://<hostname>:<nodePort output>
+change the UM_Connection to 
+nsp:// <hostname> : <nodePort output>
 
 
 
