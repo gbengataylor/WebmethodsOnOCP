@@ -62,7 +62,7 @@ TODO..
 
 find the node port
 
- oc get svc yn -o yaml | grep nodePort
+ oc get svc um -o yaml | grep nodePort
 or 
 
 Check the Service->um in the web console for the node port
