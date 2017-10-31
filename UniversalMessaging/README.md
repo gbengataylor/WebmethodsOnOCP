@@ -5,7 +5,12 @@ http://techcommunity.softwareag.com/ecosystem/communities/public/apama/products/
 # Build the docker image
 Download the Universal Messaging Packaging Kit for Docker - http://techcommunity.softwareag.com/ecosystem/communities/public/apama/products/apama/.links/universal-messaging-docker
 
-Edit the file to change the group and permissions or just use the Dockerfile in this directory
+Edit the file to change the group and permissions before the CMD command:
+
+    +++ #edit, change group and permissions
+    +++ RUN chgrp -R 0 /um_home && chmod -R g=u /um_home
+    
+or just use the Dockerfile in this directory
 
 copy the Dockerfile to where softwareag webmethods is installed. Assume it is installed in /opt/softwareag/
 
@@ -27,7 +32,9 @@ docker stop um_container && docker rm um_container
 oc new-app  um.yml --param IMAGE_TAG=100
 
 # Deploy in openshift without the template 
+
 oc new-app --docker-image=um:100
+
 oc expose service um
 
 
