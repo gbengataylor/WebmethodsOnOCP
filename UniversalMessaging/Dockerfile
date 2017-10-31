@@ -57,7 +57,6 @@ WORKDIR /um_home/
 
 #edit, change group and permissions
 RUN chgrp -R 0 /um_home && chmod -R g=u /um_home
-#additionall??
 
 # The default operation for the image is to start a realm server
 # You probably have no need to override this
