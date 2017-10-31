@@ -19,7 +19,7 @@ Test the image
 
 docker run -d -p 9000:9000 --name um_container um:100
 
-Stoop and delete the container
+Stop and delete the running container
 
 docker stop um_container && docker rm um_container
 
