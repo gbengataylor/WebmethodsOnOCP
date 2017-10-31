@@ -1,0 +1,33 @@
+# Copyright (c) 2015 Software AG, Darmstadt, Germany and/or Software AG USA Inc., Reston, VA, USA, and/or its subsidiaries and/or its affiliates and/or their licensors.
+# Use, reproduction, transfer, publication or disclosure is prohibited except as specifically provided for in your License Agreement with Software AG
+#
+# $Date: 2015-07-15 19:48:52 +0300 (Wed, 15 Jul 2015) $
+# $Revision: 259620 $
+
+# Runs the UM realm server
+um:
+    # Build a preconfigured UM, containing the web content for the TradeSpace demo, and configuring the File Plugin to serve it
+    dockerfile: Dockerfile.um
+    build: .
+    # Expose the NHP port to the host machine, so that a web browser can be pointed at it
+    ports:
+     - "8080:8080"
+
+# Runs the FXRates publisher application
+fxrates:
+    # Build an image containing the application's code
+    dockerfile: Dockerfile.fx
+    build: .
+    # Use a local docker link to give this container permission to connect to the 'um' container, and the ability to look up the hostname
+    # 'umhost' to resolve it
+    links:
+        - um:umhost
+    command: java -DRNAME=nhp://umhost:8080 -DRNAME2=nhp://umhost:8080 -DRCHANNAME=/fxdemo/prices -DCHANNAME=/fxdemo/prices com.pcbsys.demos.feedsimulators.FXIndices
+
+# Runs the FXNews publisher application
+fxnews:
+    dockerfile: Dockerfile.fx
+    build: .
+    links:
+        - um:umhost
+    command: java -DRNAME=nhps://showcase.um.softwareag.com:443 -DRNAME2=nhp://umhost:8080 -DRCHANNAME=/fxdemo/news -DCHANNAME=/fxdemo/news com.pcbsys.demos.feedsimulators.NewsFeeder

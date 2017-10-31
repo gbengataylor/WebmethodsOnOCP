@@ -1,0 +1,17 @@
+# Copyright (c) 2015 Software AG, Darmstadt, Germany and/or Software AG USA Inc., Reston, VA, USA, and/or its subsidiaries and/or its affiliates and/or their licensors.
+# Use, reproduction, transfer, publication or disclosure is prohibited except as specifically provided for in your License Agreement with Software AG
+#
+# $Date: 2015-07-15 19:48:52 +0300 (Wed, 15 Jul 2015) $
+# $Revision: 259620 $
+#
+# This Dockerfile creates a preconfigured image from the base UM image, containing web content and configuration
+
+FROM um
+MAINTAINER SoftwareAG
+# Web content
+COPY ./demo/www /um_home/server/umserver/plugins/htdocs
+# Configuration
+COPY realmconfig.xml /um_home/realmconfig.xml
+RUN umctx nimportrealm /um_home/realmconfig.xml -all
+# Expose the NHP port to allow the TradeSpace publishers to connect
+EXPOSE 8080

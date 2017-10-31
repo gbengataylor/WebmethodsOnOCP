@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<NirvanaRealm comment="Realm configuration from nirvana" exportDate="June 18 2015" name="nirvana">
+    <ChannelSet>
+        <ChannelEntry>
+            <ChannelAttributesEntry EID="0" TTL="259200000" capacity="150" clusterWide="false" jmsEngine="false" mergeEngine="false" name="/fxdemo/news" type="RELIABLE_TYPE"/>
+            <ChannelPermissionSet>
+                <ChannelACLEntry fullControl="false" getLastEID="true" host="*" listACLEntries="true" modifyACLEntries="true" name="*" publish="true" purgeEvents="false" subscribe="true" useNamedSubcription="true"/>
+            </ChannelPermissionSet>
+        </ChannelEntry>
+        <ChannelEntry>
+            <ChannelAttributesEntry EID="0" TTL="300000" capacity="0" clusterWide="false" jmsEngine="false" mergeEngine="false" name="/fxdemo/chat" type="RELIABLE_TYPE"/>
+            <ChannelPermissionSet>
+                <ChannelACLEntry fullControl="false" getLastEID="true" host="*" listACLEntries="true" modifyACLEntries="true" name="*" publish="true" purgeEvents="false" subscribe="true" useNamedSubcription="false"/>
+            </ChannelPermissionSet>
+        </ChannelEntry>
+        <ChannelEntry>
+            <ChannelAttributesEntry EID="0" TTL="0" capacity="50" clusterWide="false" jmsEngine="false" mergeEngine="false" name="/fxdemo/trades" type="RELIABLE_TYPE"/>
+            <ChannelPermissionSet>
+                <ChannelACLEntry fullControl="true" getLastEID="true" host="*" listACLEntries="true" modifyACLEntries="true" name="*" publish="true" purgeEvents="true" subscribe="true" useNamedSubcription="true"/>
+            </ChannelPermissionSet>
+        </ChannelEntry>
+        <ChannelEntry>
+            <ChannelAttributesEntry EID="0" TTL="0" capacity="0" clusterWide="false" jmsEngine="false" mergeEngine="false" name="/fxdemo/prices" type="RELIABLE_TYPE"/>
+            <ChannelPermissionSet>
+                <ChannelACLEntry fullControl="true" getLastEID="true" host="*" listACLEntries="true" modifyACLEntries="true" name="*" publish="true" purgeEvents="true" subscribe="true" useNamedSubcription="true"/>
+            </ChannelPermissionSet>
+            <ChannelKeySet>
+                <ChannelKeyEntry keyDepth="1" keyName="name"/>
+            </ChannelKeySet>
+        </ChannelEntry>
+    </ChannelSet>
+    <RealmInterfaces>
+        <RealmNHPInterface>
+            <RealmInterface acceptThreads="4" adapter="0.0.0.0" advertise="true" allowclientconnections="true" allowforinterrealm="true" authtime="10000" autostart="true" backlog="100" name="nhp1" port="8080" receivebuffersize="49152" sendbuffersize="49152"/>
+            <JavascriptConfigEntry InitialJavascript="" AjaxLPActiveDelay="100" AjaxLPIdleDelay="60000" EnableNativeComet="true" EnableWebSockets="true" CORSAllowedOrigins="*"/>
+            <RealmInterfacePlugin mountPoint="/" name="File Plugin">
+                <NirvanaFilePlugin>
+                    <PluginConfigEntry description="Add the username to the sessions cookies" name="AddUserAsCookie" value=""/>
+                    <PluginConfigEntry description="List of key=value string which is passed to the authenticators init function" name="AuthParameters" value=""/>
+                    <PluginConfigEntry description="Name of authenticator to use, leave to use default, else classname to use" name="Authenticator" value=""/>
+                    <PluginConfigEntry description="Path used to locate the files" name="BasePath" value="/um_home/server/umserver/plugins/htdocs/"/>
+                    <PluginConfigEntry description="Size of the internal buffer to use to send the data" name="BufferSize" value=""/>
+                    <PluginConfigEntry description="Specifies the cache control for the plugin" name="Cache-Control" value=""/>
+                    <PluginConfigEntry description="Size in bytes that can be stored in the cache" name="CacheObjectSize" value=""/>
+                    <PluginConfigEntry description="Number of objects to store in the cache" name="CachedObjects" value=""/>
+                    <PluginConfigEntry description="If no file name is specified which file should be returned" name="DefaultName" value="index.html"/>
+                    <PluginConfigEntry description="name of the file to send when file can not be located" name="FileNotFoundPage" value="404.html"/>
+                    <PluginConfigEntry description="A comma seperated list of groups which the user must be a member of at least one to be granted access" name="GroupNames" value=""/>
+                    <PluginConfigEntry description="Name of the file to load the mime type information from" name="MimeType" value=""/>
+                    <PluginConfigEntry description="Choose true to have the user file get reloaded on each auth request" name="ReloadUserFileDynamically" value=""/>
+                    <PluginConfigEntry description="A comma seperated list of roles which the user must have at least one of to be granted access" name="RoleNames" value=""/>
+                    <PluginConfigEntry description="Name of the authentication realm" name="Security Realm" value=""/>
+                    <PluginConfigEntry description="Choose true to have separate log files" name="SeparateAccessandErrorLogs" value=""/>
+                </NirvanaFilePlugin>
+            </RealmInterfacePlugin>
+            <RealmInterfacePlugin mountPoint="/lib/js" name="File Plugin">
+                <NirvanaFilePlugin>
+                    <PluginConfigEntry description="Add the username to the sessions cookies" name="AddUserAsCookie" value=""/>
+                    <PluginConfigEntry description="List of key=value string which is passed to the authenticators init function" name="AuthParameters" value=""/>
+                    <PluginConfigEntry description="Name of authenticator to use, leave to use default, else classname to use" name="Authenticator" value=""/>
+                    <PluginConfigEntry description="Path used to locate the files" name="BasePath" value="/um_home/javascript/lib"/>
+                    <PluginConfigEntry description="Size of the internal buffer to use to send the data" name="BufferSize" value=""/>
+                    <PluginConfigEntry description="Specifies the cache control for the plugin" name="Cache-Control" value=""/>
+                    <PluginConfigEntry description="Size in bytes that can be stored in the cache" name="CacheObjectSize" value=""/>
+                    <PluginConfigEntry description="Number of objects to store in the cache" name="CachedObjects" value=""/>
+                    <PluginConfigEntry description="If no file name is specified which file should be returned" name="DefaultName" value="index.html"/>
+                    <PluginConfigEntry description="name of the file to send when file can not be located" name="FileNotFoundPage" value="404.html"/>
+                    <PluginConfigEntry description="A comma seperated list of groups which the user must be a member of at least one to be granted access" name="GroupNames" value=""/>
+                    <PluginConfigEntry description="Name of the file to load the mime type information from" name="MimeType" value=""/>
+                    <PluginConfigEntry description="Choose true to have the user file get reloaded on each auth request" name="ReloadUserFileDynamically" value=""/>
+                    <PluginConfigEntry description="A comma seperated list of roles which the user must have at least one of to be granted access" name="RoleNames" value=""/>
+                    <PluginConfigEntry description="Name of the authentication realm" name="Security Realm" value=""/>
+                    <PluginConfigEntry description="Choose true to have separate log files" name="SeparateAccessandErrorLogs" value=""/>
+                </NirvanaFilePlugin>
+            </RealmInterfacePlugin>
+        </RealmNHPInterface>
+    </RealmInterfaces>
+</NirvanaRealm>
