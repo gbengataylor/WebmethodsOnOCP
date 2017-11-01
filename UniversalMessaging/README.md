@@ -69,7 +69,7 @@ oc patch svc/um --patch '{"spec":{"type":"NodePort"}}'
 
 TODO..
 
-# Test
+# Retrieve the node port
 
 find the node port
 
@@ -77,6 +77,14 @@ find the node port
 or 
 
 Check the Service->um in the web console for the node port
+
+# Display the REALM AND JMS CHANNEL via the UM enterprise manager local UI
+
+/opt/softwareag/UniversalMessaging/java/umserver/bin/nenterprisemgr
+
+enter the realm for the um container using the nsp://hostname:nodePort output
+
+# Test the connection using the IS Agent
 
 login into Integration Server Admin console
 
