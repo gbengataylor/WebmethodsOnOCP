@@ -18,9 +18,9 @@ copy the Dockerfile to where softwareag webmethods is installed.
 
 copy the umtcx file to the softwareag directory
 
-in the softwareag directory, build the docker file
+build the docker file with the webmethods installed directory as the context directory
 
-docker build --tag um:100 .
+docker build --tag um:100 /opt/softwareag/
 
 Test the image
 
@@ -43,6 +43,14 @@ change the UM_Connection to nsp://hostname:9000
 Go to Settings > Messaging > webMethods Messaging Settings
 
 If successful, Universal Messaging should now be Enabled
+
+# Deploy in Openshift
+
+The Universal Messaging container uses nsp:// so that external applications can access it. The openshift documentation has information on how to reach non-http endpoints - https://docs.openshift.com/container-platform/3.5/dev_guide/getting_traffic_into_cluster.html
+
+These instructions employs the NodePort method
+
+https://docs.openshift.com/container-platform/3.6/dev_guide/getting_traffic_into_cluster.html#using-nodeport
 
 # Deploy in Openshift using the um.yml template
 
