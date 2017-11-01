@@ -3,7 +3,10 @@
 http://techcommunity.softwareag.com/ecosystem/communities/public/apama/products/universal-messaging/downloads/
 
 # Build the docker image
-Download the Universal Messaging Packaging Kit for Docker - http://techcommunity.softwareag.com/ecosystem/communities/public/apama/products/universal-messaging/5dcdf831-941d-11e5-b74b-cd8d7ef22065/?title=Universal+Messaging+Packaging+Kit+for+Docker%C2%AE
+You can use the docker file included in the Universal Messaging install  - 
+/opt/softwareag/UniversalMessaging/server/umserver/bin/docker/image
+
+Or Download the Universal Messaging Packaging Kit for Docker - http://techcommunity.softwareag.com/ecosystem/communities/public/apama/products/universal-messaging/5dcdf831-941d-11e5-b74b-cd8d7ef22065/?title=Universal+Messaging+Packaging+Kit+for+Docker%C2%AE
 
 Edit the um/image/Dockerfile to change the group and permissions before the CMD command:
 
