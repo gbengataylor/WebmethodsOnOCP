@@ -1,7 +1,7 @@
 # WebmethodsOnOCP
 Deploying Webmethods Integration Server Agent and Universal Messaging to OpenShift
 
-These instructions were done with webmethods 10 however, docker support for webmethods has been available since Webmethods 9.7. See https://techcommunity.softwareag.com/pwiki/-/wiki/Main/Running+Integration+Server+within+a+Docker+container
+These instructions were composed using webmethods 10 however, docker support for webmethods has been available since version  9.7. See https://techcommunity.softwareag.com/pwiki/-/wiki/Main/Running+Integration+Server+within+a+Docker+container
 
 Assumptions - 
 
