@@ -97,3 +97,6 @@ Create a JMS Connection Alias at
 Settings > Messaging > JMS Settings > JMS Connection Alias > Create
 Create conneciton using JNDI LOOKUP and the JNDI provider alias name should be tht of the recently created provider. Connection factory lookup name ConnectionFactory (from the dockerfile)
 
+**to get this work need to add a new ConnectionFactory via the enterprise manager UI that now has the correct nsp
+
+
