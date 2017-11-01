@@ -2,6 +2,9 @@
 
 Pre-requisite - make sure um image with tag "100" has been built
 
+The Dockerfile used in this example is just a modified version of the one found in /opt/softwareag/UniversalMessaging/server/umserver/bin/docker/samples/Configuration
+
+
 # Build the docker image
 docker build --tag um_configured:100 .
 
