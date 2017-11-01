@@ -33,6 +33,14 @@ Stop and delete the running container
 
 docker stop um_container && docker rm um_container
 
+# Test the realm using the enterprise manager local UI
+
+/opt/softwareag/UniversalMessaging/java/umserver/bin/nenterprisemgr
+
+enter the realm for the um container using the nsp://hostname:9000
+
+You should see the named realm as defined in the Dockerfile - umserver
+
 # Test the Universal Manager with the webmethods Integration Server
 
 Assumes the IS agent is running
@@ -78,11 +86,13 @@ or
 
 Check the Service->um in the web console for the node port
 
-# Display the REALM AND JMS CHANNEL via the UM enterprise manager local UI
+# Test the realm using the enterprise manager local UI
 
 /opt/softwareag/UniversalMessaging/java/umserver/bin/nenterprisemgr
 
 enter the realm for the um container using the nsp://hostname:nodePort output
+
+You should see the named realm as defined in the Dockerfile - umserver
 
 # Test the connection using the IS Agent
 
