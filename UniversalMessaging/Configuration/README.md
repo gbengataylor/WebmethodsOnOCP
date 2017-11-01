@@ -12,6 +12,13 @@ Test the image
 
 docker run -d -p 9000:9000 --name um_configured_container um_configured:100
 
+# Display the REALM AND JMS CHANNEL via the UM enterprise manager local UI
+
+/opt/softwareag/UniversalMessaging/java/umserver/bin/nenterprisemgr
+
+enter the realm for the um-configured container using the nsp://hostname:9000
+
+You should now see the realm, Channel and JMS artifacts defined in the Dockerfile
 
 # Test the Universal Manager with the webmethods Integration Server
 
