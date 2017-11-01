@@ -79,7 +79,7 @@ Add a new UM_Connection and set the realm to
 nsp://hostname:nodePort output
 
 
-# TODO: Display the JMS CHANNEL VIA the IS Agent
+# TODO: Connect to the JMS CHANNEL VIA the IS Agent
 
 Creat a JNDI  Provider alias at Settings > Messaging > JNDI Settings
 
