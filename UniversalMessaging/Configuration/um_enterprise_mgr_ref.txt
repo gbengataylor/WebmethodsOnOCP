@@ -1,0 +1,2 @@
+http://serviceorientedarchitect.com/how-to-test-jms-processing-in-webmethodsterracotta-universal-messaging-and-integration-server-with-soapui-and-hermesjms/
+http://um.terracotta.org/#page/%2Fum.terracotta.org%2Funiversal-messaging-webhelp%2Fto-header_for_administration.html%23
