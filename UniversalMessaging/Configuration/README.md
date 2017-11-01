@@ -45,7 +45,7 @@ oc patch svc/um-configured --patch '{"spec":{"type":"NodePort"}}'
 
 TODO..
 
-# Test
+# Retrieve the node port
 
 find the node port
 
@@ -53,6 +53,16 @@ find the node port
 or 
 
 Check the Service->um-configured in the web console for the node port
+
+# Display the REALM AND JMS CHANNEL via the UM enterprise manager local UI
+
+/opt/softwareag/UniversalMessaging/java/umserver/bin/nenterprisemgr
+
+enter the realm for the um-configured container using the nsp://hostname:nodePort output
+
+You should now see the realm, Channel and JMS artifacts defined in the Dockerfile
+
+# Test the connection using the IS Agent
 
 login into Integration Server Admin console
 
@@ -62,7 +72,7 @@ Add a new UM_Connection and set the realm to
 nsp://hostname:nodePort output
 
 
-TODO: Show the JMS queue and channel
+# TODO: Display the JMS CHANNEL VIA the IS Agent
 
 Creat a JNDI  Provider alias at Settings > Messaging > JNDI Settings
 
