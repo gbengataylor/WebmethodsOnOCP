@@ -1,6 +1,6 @@
 # Universal Messaging configured with JMS queue and channgel Deployed in OCP
 
-Pre-requisite - make sure um image has been built
+Pre-requisite - make sure um image with tag "100" has been built
 
 # Build the docker image
 docker build --tag um_configured:100 .
