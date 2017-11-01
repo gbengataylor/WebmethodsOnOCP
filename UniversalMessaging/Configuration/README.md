@@ -65,7 +65,13 @@ Creat a JNDI  Provider alias at Settings > Messaging > JNDI Settings
 
 Use the um-configured nsp address and port as the Provider URL. Ensure that the JDNI Template is UM
 
-Test Lookup and ensure it is successful
+Test Lookup and ensure it is successful. It should return the Connection Factories and queues defined in the docker file
+
+  "ConnectionFactory: javax.jms.ConnectionFactory
+  QueueConnectionFactory: javax.jms.QueueConnectionFactory  
+  TopicConnectionFactory: javax.jms.TopicConnectionFactory
+  testqueue: javax.jms.Queue
+  testtopic: javax.jms.Topic"
 
 Create a JMS Connection Alias at 
 Settings > Messaging > JMS Settings > JMS Connection Alias > Create
