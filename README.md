@@ -1,9 +1,9 @@
 # WebmethodsOnOCP
 Deploying Webmethods Integration Server Agent and Universal Messaging to OpenShift
 
-Pre-requisite - install webmethods 10 
+These instructions were done with webmethods 10 however, docker support for webmethods has been available since Webmethods 9.7. See https://techcommunity.softwareag.com/pwiki/-/wiki/Main/Running+Integration+Server+within+a+Docker+container
 
 Assumptions - 
 
-The docker images are built on the same machine where the OpenShift cluster is running
+These instructs assume that the docker images are built on the same machine where the OpenShift cluster is running. Alternately,  the docker images can be built and then push to a remote Openshift cluster's container image registry. 
 
