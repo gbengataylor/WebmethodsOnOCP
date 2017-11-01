@@ -60,3 +60,14 @@ nsp://hostname:nodePort output
 
 
 TODO: Show the JMS queue and channel
+
+Creat a JNDI  Provider alias at Settings > Messaging > JNDI Settings
+
+Use the um-configured nsp address and port as the Provider URL. Ensure that the JDNI Template is UM
+
+Test Lookup and ensure it is successful
+
+Create a JMS Connection Alias at 
+Settings > Messaging > JMS Settings > JMS Connection Alias > Create
+Create conneciton using JNDI LOOKUP and the JNDI provider alias name should be tht of the recently created provider. Connection factory lookup name ConnectionFactory (from the dockerfile)
+
