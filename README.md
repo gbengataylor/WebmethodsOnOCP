@@ -5,5 +5,5 @@ These instructions were composed using webmethods 10 however, docker support for
 
 Assumptions - 
 
-These examples assume that the docker images are built on the same machine where the OpenShift cluster is running. Alternately,  the docker images can be built and then push to a remote Openshift cluster's container image registry. 
+These examples assume that the docker images are built on the same machine where the OpenShift cluster is running. Alternately,  the docker images can be built and then pushed to a remote Openshift cluster's container image registry. 
 
