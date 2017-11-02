@@ -1,7 +1,23 @@
 # WebmethodsOnOCP
 Deploying Webmethods IS Agent on openshift 
 
-Instructions to build initial Integration Server docker image can be found here - http://www.i8c.be/webmethods-integration-agent-aws-container-service/ . These were the instructions used to build the base webmethods IS Agent docker file. Alternately, the instructions in this link could be used - https://techcommunity.softwareag.com/pwiki/-/wiki/Main/Running+Integration+Server+within+a+Docker+container
+# Build the base Integration Server Agent image
+Instructions to build initial Integration Server docker image can be found here [1] . These were the instructions used to build the base webmethods IS Agent docker file. 
+
+Alternately, the instructions in this link [2] could be used.
+
+This directory has an example dockerfile called IS_Agent_Dockerfile that was generated using the build script described in [1]. If instructions in [1] are used, the docker image can be built with the following command:
+
+<SAG installation dir>/IntegrationServer/docker/is_container.sh build -Dfile.name=IS_Agent_Dockerfile -Dimage.name=is_agent:100
+
+If the instructions in [2] are used, the following command can be run to build the image using the webmethods installed directory as the context directory:
+
+docker build --tag is_agent:100 -f IS_Agent_Dockerfile /opt/softwareag/
+
+For the purposes of this example, the tag "100" will be used for all the images. This tag can be changed, just update all references to it in the instructions and dockerfiles.
+
+[1] http://www.i8c.be/webmethods-integration-agent-aws-container-service/
+[2] https://techcommunity.softwareag.com/pwiki/-/wiki/Main/Running+Integration+Server+within+a+Docker+container
 
 # Update the docker image
 If the softwareag is installed in /opt/softwareag, copy the IS_Agent_wrapper_Dockerfile to the directory. This wrapper docker file updates the file persmissions on certain folders in the container so that the container can be run in openshift as a non-root user
