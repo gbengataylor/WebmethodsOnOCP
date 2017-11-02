@@ -63,7 +63,7 @@ These instructions employs the NodePort method
 
 https://docs.openshift.com/container-platform/3.6/dev_guide/getting_traffic_into_cluster.html#using-nodeport
 
-# Deploy in Openshift using the um.yml template
+# Deploy in Openshift using the pre-defined um.yml template
 
 oc new-app  um.yml --param IMAGE_TAG=100
 
