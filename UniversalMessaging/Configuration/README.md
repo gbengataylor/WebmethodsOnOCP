@@ -38,7 +38,7 @@ Stop and delete the running container
 
 docker stop um_configured_container && docker rm um_configured_container
 
-# Deploy in Openshift using the um_configured.yml template
+# Deploy in Openshift using the pre-defined um_configured.yml template
 
 oc new-app  um_configured.yml --param IMAGE_TAG=100
 
