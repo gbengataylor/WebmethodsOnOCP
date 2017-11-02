@@ -17,6 +17,7 @@ docker build --tag is_agent:100 -f IS_Agent_Dockerfile /opt/softwareag/
 For the purposes of this example, the tag "100" will be used for all the images. This tag can be changed, just update all references to it in the instructions and dockerfiles.
 
 [1] http://www.i8c.be/webmethods-integration-agent-aws-container-service/
+
 [2] https://techcommunity.softwareag.com/pwiki/-/wiki/Main/Running+Integration+Server+within+a+Docker+container
 
 # Update the docker image
