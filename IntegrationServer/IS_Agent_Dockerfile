@@ -1,0 +1,53 @@
+FROM centos:7
+
+MAINTAINER Software AG
+
+COPY ./jvm/jvm/jre/ /sag/jvm/jvm/jre/
+ENV JAVA_HOME /sag/jvm/jvm/jre/
+
+ENV INSTANCE_NAME=default
+
+COPY ./install/jars/ /sag/install/jars/
+COPY ./install/profile/ /sag/install/profile/
+COPY ./install/products/ /sag/install/products/
+
+COPY ./Licenses/sagosch /sag/Licenses/sagosch
+
+COPY ./common/bin/ /sag/common/bin/
+COPY ./common/conf/ /sag/common/conf/
+COPY ./common/lib/ /sag/common/lib/
+COPY ./common/runtime/ /sag/common/runtime/
+
+COPY ./WS-Stack/ /sag/WS-Stack/
+
+COPY ./IntegrationServer/bin/ /sag/IntegrationServer/bin/
+COPY ./IntegrationServer/lib/ /sag/IntegrationServer/lib/
+COPY ./IntegrationServer/updates/ /sag/IntegrationServer/updates/
+COPY ./IntegrationServer/features/ /sag/IntegrationServer/features/
+
+COPY ./IntegrationServer/.tc.dev.log4j.properties /sag/IntegrationServer/.tc.dev.log4j.properties
+
+COPY ./IntegrationServer/instances/${INSTANCE_NAME}/web/ /sag/IntegrationServer/instances/${INSTANCE_NAME}/web/
+COPY ./IntegrationServer/instances/${INSTANCE_NAME}/updates/ /sag/IntegrationServer/instances/${INSTANCE_NAME}/updates/
+COPY ./IntegrationServer/instances/${INSTANCE_NAME}/replicate/ /sag/IntegrationServer/instances/${INSTANCE_NAME}/replicate/
+COPY ./IntegrationServer/instances/${INSTANCE_NAME}/lib/ /sag/IntegrationServer/instances/${INSTANCE_NAME}/lib/
+COPY ./IntegrationServer/instances/${INSTANCE_NAME}/bin/ /sag/IntegrationServer/instances/${INSTANCE_NAME}/bin/
+COPY ./IntegrationServer/instances/${INSTANCE_NAME}/config/ /sag/IntegrationServer/instances/${INSTANCE_NAME}/config/
+COPY ./IntegrationServer/instances/${INSTANCE_NAME}/log4j.properties /sag/IntegrationServer/instances/${INSTANCE_NAME}/log4j.properties
+
+COPY ./IntegrationServer/instances/${INSTANCE_NAME}/packages/Default/ /sag/IntegrationServer/instances/${INSTANCE_NAME}/packages/Default/
+COPY ./IntegrationServer/instances/${INSTANCE_NAME}/packages/WmRoot/ /sag/IntegrationServer/instances/${INSTANCE_NAME}/packages/WmRoot/
+COPY ./IntegrationServer/instances/${INSTANCE_NAME}/packages/WmPublic/ /sag/IntegrationServer/instances/${INSTANCE_NAME}/packages/WmPublic/
+
+COPY ./IntegrationServer/instances/lib/ /sag/IntegrationServer/instances/lib/
+COPY ./IntegrationServer/instances/is_instance.xml /sag/IntegrationServer/instances/is_instance.xml
+COPY ./IntegrationServer/instances/is_instance.sh /sag/IntegrationServer/instances/is_instance.sh
+COPY ./profiles/IS_${INSTANCE_NAME}/configuration/custom_wrapper.conf /sag/IntegrationServer/instances/custom_wrapper.conf.template
+
+RUN rm /sag/IntegrationServer/instances/${INSTANCE_NAME}/config/repository4.cnf; rm /sag/IntegrationServer/instances/${INSTANCE_NAME}/config/security/keystore/default_is_keystore_ks_config.xml; rm /sag/IntegrationServer/instances/${INSTANCE_NAME}/config/security/keystore/default_is_truststore_ts_config.xml; cd /sag/IntegrationServer/instances; ./is_instance.sh updateDockerConfigFiles -Dinstance.name=${INSTANCE_NAME}; cd /sag/IntegrationServer/instances; ./is_instance.sh create-osgi-profile -Dinstance.name=${INSTANCE_NAME}
+COPY ./profiles/IS_${INSTANCE_NAME}/configuration/com.softwareag.platform.config.propsloader/com.softwareag.sso.pid.properties.wmcloud /sag/profiles/IS_${INSTANCE_NAME}/configuration/com.softwareag.platform.config.propsloader/com.softwareag.sso.pid.properties
+COPY ./profiles/IS_${INSTANCE_NAME}/configuration/security/ /sag/profiles/IS_${INSTANCE_NAME}/configuration/security/
+
+EXPOSE 5555
+EXPOSE 9999
+LABEL com.softwareag.product="IntegrationServer" \com.softwareag.product.version="10.0.0.0" \com.softwareag.product.build="105" \com.softwareag.webmethodscloud.primaryPort="5555"
