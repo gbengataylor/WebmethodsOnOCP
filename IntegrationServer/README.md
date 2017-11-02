@@ -45,7 +45,7 @@ stop and delete the container:
 docker stop isagent && docker rm isagent
 
 
-# Deploy webmethods Integration Server to OCP using the template 
+# Deploy webmethods Integration Server to OCP using the pre-defined template 
 oc new-app  webmethods.yml --param IMAGE_TAG=100-wrapper
 
 # Deploy webmethods Integration Server to OCP with multiple commands (not recommended)
