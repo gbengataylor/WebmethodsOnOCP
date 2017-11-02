@@ -57,6 +57,7 @@ TODO..
 find the node port
 
  oc get svc um-configured -o yaml | grep nodePort
+ 
 or 
 
 Check the Service->um-configured in the web console for the node port
