@@ -95,7 +95,8 @@ Test Lookup and ensure it is successful. It should return the Connection Factori
 
 Create a JMS Connection Alias at 
 Settings > Messaging > JMS Settings > JMS Connection Alias > Create
-Create conneciton using JNDI LOOKUP and the JNDI provider alias name should be tht of the recently created provider. Connection factory lookup name ConnectionFactory (from the dockerfile)
+
+Create conneciton using JNDI LOOKUP. The JNDI provider alias name should be that of the recently created JNDO provider. Connection factory lookup name should be the value defined in the DockerFile. In this example, it is ConnectionFactory.
 
 **to get this work need to update the ConnectionFactory via the enterprise manager UI with the correct REALM URL. When the factory was created using the dockerfile, the realm defaulted to nsp://localhost:9000
 
