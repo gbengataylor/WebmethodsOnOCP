@@ -61,8 +61,12 @@ oc expose service is-agent --name=9999 --port=9999
 
 # Test the admin consoles
 
-Using the routes exposed 
+Retrieve the routes exposed 
 
 oc get routes 
+
+OR
+
+click the exposed routes in the OpenShift console
 
 Log into the admin consoles using Administrator/manage or whatever user/pass that has been setup for the Integration Server Agent
