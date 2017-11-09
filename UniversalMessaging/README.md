@@ -19,7 +19,7 @@ or just use the Dockerfile in this directory
 
 copy the Dockerfile to where softwareag webmethods is installed.
 
-copy the umtcx file to the softwareag directory
+copy the umtcx file to the softwareag directory (You can use the github version or the file in /opt/softwareag/UniversalMessaging/server/templates/docker) 
 
 build the docker file with the webmethods installed directory as the context directory
 
