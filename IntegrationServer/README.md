@@ -46,7 +46,7 @@ docker stop isagent && docker rm isagent
 
 
 # Deploy webmethods Integration Server to OCP using the pre-defined template 
-oc new-app  webmethods.yml --param IMAGE_TAG=100-wrapper
+oc new-app  is_agent.yml --param IMAGE_TAG=100-wrapper
 
 # Deploy webmethods Integration Server to OCP with multiple commands (not recommended)
 oc run is-agent --image=is_agent:100-wrapper --command -- /sag/profiles/IS_default/bin/sagis100 console
