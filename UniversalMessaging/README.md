@@ -25,13 +25,9 @@ build the docker file with the webmethods installed directory as the context dir
 
 docker build --tag um:100 /opt/softwareag/
 
-Test the image
+# Test the image
 
 docker run -d -p 9000:9000 --name um_container um:100
-
-Stop and delete the running container
-
-docker stop um_container && docker rm um_container
 
 # Test the realm using the enterprise manager local UI
 
@@ -54,6 +50,12 @@ change the UM_Connection to nsp://hostname:9000
 Go to Settings > Messaging > webMethods Messaging Settings
 
 If successful, Universal Messaging should now be Enabled
+
+# Stop the docker container
+
+Stop and delete the running container
+
+docker stop um_container && docker rm um_container
 
 # Deploy in Openshift
 
