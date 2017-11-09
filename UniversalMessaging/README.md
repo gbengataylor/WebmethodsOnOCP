@@ -59,11 +59,11 @@ docker stop um_container && docker rm um_container
 
 # Deploy in Openshift
 
-The Universal Messaging container uses nsp:// so that external applications can access it. The openshift documentation has information on how to reach non-http endpoints - https://docs.openshift.com/container-platform/3.5/dev_guide/getting_traffic_into_cluster.html
+The Universal Messaging container uses nsp:// so that external applications can access it. The openshift documentation has information on how to reach non-http endpoints -https://docs.openshift.com/container-platform/3.6/dev_guide/expose_service/index.html
 
 These instructions employs the NodePort method
 
-https://docs.openshift.com/container-platform/3.6/dev_guide/getting_traffic_into_cluster.html#using-nodeport
+https://docs.openshift.com/container-platform/3.6/dev_guide/expose_service/expose_internal_ip_nodeport.html
 
 # Deploy in Openshift using the pre-defined um.yml template
 
