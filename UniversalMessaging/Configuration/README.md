@@ -1,4 +1,4 @@
-# Universal Messaging configured with JMS queue and channgel Deployed in OCP
+# Universal Messaging configured with JMS queue and channel Deployed in OCP
 
 Pre-requisite - make sure um image with tag "100" has been built
 
