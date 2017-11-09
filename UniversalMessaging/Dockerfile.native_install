@@ -9,7 +9,8 @@
 # a JVM), as opposed to the SAG installer. It is nearly identical, except for
 # paths.
 
-FROM centos:7
+#modified from centos:7
+FROM rhel:latest
 
 MAINTAINER SoftwareAG
 
