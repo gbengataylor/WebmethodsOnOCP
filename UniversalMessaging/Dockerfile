@@ -9,9 +9,10 @@
 # existing UM installation. The build should be run from the root of your UM
 # installation e.g. /opt/SoftwareAG/UniversalMessaging/
 
-# Pull CentOS 7 base image from the Docker Hub - this is the latest supported
+# Pull RHEL base image from the Docker Hub - this is the latest supported
 # operating system for this version of UM.
-FROM centos:7
+#modified from centos:7
+FROM rhel:latest
 
 MAINTAINER SoftwareAG
 
