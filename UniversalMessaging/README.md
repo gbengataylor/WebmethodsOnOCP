@@ -65,11 +65,11 @@ These instructions employs the NodePort method
 
 https://docs.openshift.com/container-platform/3.6/dev_guide/expose_service/expose_internal_ip_nodeport.html
 
-# Deploy in Openshift using the pre-defined um.yml template
+# Deploy in Openshift using the pre-defined um.yml template (RECOMMENDED)
 
 oc new-app  um.yml --param IMAGE_TAG=100
 
-# Deploy in openshift without the template 
+# Alternate -  Deploy in openshift without the template 
 
 oc new-app --docker-image=um:100
 
