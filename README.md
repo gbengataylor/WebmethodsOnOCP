@@ -10,7 +10,9 @@ These instructions are just a foundation to help you start. In a production depl
 There are three instructions:
 
 --Deploying Integration Server  (see IntegrationServer directory)
+
 --Deploying Universal Messaging (see UniversalMessaging directory)
+
 --Deploying Universal Messaging with JMS artifacts(see UniversalMessaging/Configuration directory)
 
 All three have a README.
