@@ -1,15 +1,15 @@
 # WebmethodsOnOCP
 Deploying Webmethods IS Agent on openshift 
 
-# Build the base Integration Server Agent image
+# Build the base Integration Server Agent image via Dockerfile
 Instructions to build initial Integration Server docker image can be found here [1] . These were the instructions used to build the base webmethods IS Agent docker file. 
 
 Alternately, the instructions in this link [2] could be used.
 
 This directory has an example dockerfile called IS_Agent_Dockerfile that was generated using the build script described in [1]. If instructions in [1] are used, the docker image can be built with the following command:
-
+```
 <SAG installation dir>/IntegrationServer/docker/is_container.sh build -Dfile.name=IS_Agent_Dockerfile -Dimage.name=is_agent:100
-
+```
 If the instructions in [2] are used, the following command can be run to build the image using the webmethods installed directory as the context directory:
 ```
 docker build --tag is_agent:100 -f IS_Agent_Dockerfile /opt/softwareag/
